@@ -1,3 +1,17 @@
+import os
+import zipfile
+import gdown
+
+# 1. Download segment.pt if not found
+if not os.path.exists("segment.pt"):
+    gdown.download("https://drive.google.com/uc?id=1Z5ndB6yh2go1ehKmioSAFD-1SxJ-kp9p", "segment.pt", quiet=False)
+
+# 2. Download and extract burn_classifier_saved_model if not found
+if not os.path.exists("burn_classifier_saved_model"):
+    gdown.download("https://drive.google.com/uc?id=1_MvC8rsTTTPz2oiQEd8MXCwiaIEUxUGF", "burn_model.zip", quiet=False)
+    with zipfile.ZipFile("burn_model.zip", 'r') as zip_ref:
+        zip_ref.extractall("burn_classifier_saved_model")
+
 import streamlit as st
 import numpy as np
 import cv2
